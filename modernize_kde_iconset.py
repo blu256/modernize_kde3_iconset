@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/bin/env python3.9
 #-*- coding: utf-8 -*-
 #
 # KDE3 Icon Theme Modernizer
@@ -267,6 +267,11 @@ convert = {
     }
 }
 
+THEMEDATA = {
+        "index.theme":      "Icon Theme",
+        "index.desktop":    "KDE Icon Theme"
+}
+
 # Directories array
 directories = {}
 for k in convert.keys():
@@ -279,17 +284,25 @@ if __name__ == "__main__":
     print("Copyright © 2021-2022 Mavridis Philippe (aka blu.256)")
     print()
 
-    if not path.isfile("index.theme"):
+    themefilename = None
+    for f in THEMEDATA.keys():
+        if path.isfile(f):
+            themefilename = f
+            break
+
+    if themefilename is None:
         print("Error: This is not an iconset directory.")
-        print("(It's missing the 'index.theme' file)")
         exit(2)
 
     # Parse theme file
-    themefile = configparser.ConfigParser()
-    themefile.read("index.theme")
+    themefile = configparser.ConfigParser(strict=False)
+    themefile.read(themefilename)
 
-    all_dirs = themefile["Icon Theme"]["Directories"]
+    all_dirs = themefile[THEMEDATA[themefilename]]["Directories"]
     for d in all_dirs.split(","):
+        if not d:
+            continue
+
         type = themefile[d]["Context"]
         if type in directories.keys():
             directories[type].append(d)
