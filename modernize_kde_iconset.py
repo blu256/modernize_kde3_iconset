@@ -319,19 +319,19 @@ if __name__ == "__main__":
                     # Destination already exists, skip
                     if path.isfile(dst):
                         print("E" * len(ext), end="  ")
-                        log.append( "E " + dst )
+                        log.append( "Destination exists:        " + dst )
 
                     # Rename, if not a symlink
                     elif path.isfile(src) and not path.islink(src):
                         print(ext, end="  ")
                         rename(src, dst)
                         symlink(path.abspath(dst), src)
-                        log.append( "R " + src.ljust(50) + " --> " + dst )
+                        log.append( "Renamed icon:              " + src.ljust(50) + " --> " + dst )
 
                     # Source is a link, report it
                     elif path.islink(src):
                         print("@" * len(ext), end="  ")
-                        log.append( "@ " + src )
+                        log.append( "Destination exists (link): " + src )
 
                     # File does not exist
                     else:
