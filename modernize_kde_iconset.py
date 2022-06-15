@@ -90,7 +90,7 @@ convert = {
         "rightjust":              "format-justify-right",
         "text_left":              "format-text-direction-ltr",
         "text_right":             "format-text-direction-rtl",
-        "text_bold":              "fotmat-text-bold",
+        "text_bold":              "format-text-bold",
         "text_italic":            "format-text-italic",
         "text_under":             "format-text-underline",
         "text_strike":            "format-text-strikethrough",
